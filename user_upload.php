@@ -29,7 +29,7 @@ try{
 		exit(0);
 		
 	}
-	if(isset($options['file'])){
+	if(!empty($options['file'])){
 		$filename = $options['file'];
 		$dry_run = isset($options['dry_run']);
 		if($dry_run){
@@ -77,8 +77,6 @@ catch (Exception $e){
 	echo $e->getMessage()."\n";	
 }
 
-
-die;
 
 function valid_email($str) {
 
