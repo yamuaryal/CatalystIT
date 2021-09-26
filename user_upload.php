@@ -116,15 +116,6 @@ function establish_mysql_connection(){
 	}
 	return $conn;
 }
-/*s
-function establish_mysql_connection($hostname,$username,$password){
-	$conn = new mysqli($hostname, $username, $password);
-	if ($conn->connect_error) {
-		throw new Exception("Connection Failed: ".$conn->connect_error);
-	}
-	return $conn;
-}
-*/
 
 function create_users_table($conn){
 		$dbName = 'UserCollections';
@@ -154,76 +145,3 @@ function create_users_table($conn){
 		throw new Exception ("Error creating database: ". $conn->error);
     }
 }
-/*
-//Include file that store database connection information
-include('dbconfig.php');
-$servername = DBHOST;
-$username = DBUSER;
-$password = DBPWD;
-$dbName = DBNAME;
-$table = 'users';
-
-// Connect to MySQL
-$conn = new mysqli($servername, $username, $password);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// If database does not exist create one
-if (!mysqli_select_db($conn,$dbName)){
-    $sql = "CREATE DATABASE IF NOT EXISTS ".$dbName;
-	if ($conn->query($sql) === TRUE) {
-		// Create user table if it does not already exists
-		if ($result = $conn->query("SHOW TABLES LIKE '".$table."'")) {
-			if($result->num_rows == 1) {
-				echo "Users Table exists";
-			}
-		}else {
-			$sql = "CREATE TABLE users(
-			id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-			name VARCHAR(30) NOT NULL,
-			surname VARCHAR(30) NOT NULL,
-			email VARCHAR(70) NOT NULL UNIQUE
-			)";
-			if(mysqli_query($conn, $sql)){
-				echo "Table created successfully.";
-			} else{
-				echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-			}
-					
-		}		
-    }else {
-        echo "Error creating database: " . $conn->error;
-    }
-} 
-
-// Get file name from user
-$filename = readline('Please Enter the CSV File Name (Example: users.csv): ');
-
-if($filename){
-	$row = 1;
-	if (($handle = fopen("{$filename}", "r")) !== FALSE) {
-		while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-			$num = count($data);
-			// First row has column names, skip that row. 
-			//@Assumption: The order of column is always: name surname email
-				if($row > 1){ 
-					// Name and surname to have uppercase first letter ( forcing to lowercase if any letter within are capital)
-					$name = ucfirst(strtolower(trim($data[0])));
-					$surname = ucfirst(strtolower(trim($data[1])));
-					$email = strtolower(trim($data[2]));
-					if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-						
-						
-					}
-					else{
-						echo("$email is not a valid email address");
-					}
-				}
-				$row++;
-		}
-		fclose($handle);
-	}
-}
-
-*/
