@@ -116,8 +116,8 @@ function establish_mysql_connection(){
 }
 
 function create_users_table($conn){
-		$dbName = 'UserCollections';
-		$table = 'users';
+	$dbName = 'UserCollections';
+	$table = 'users';
     $sql = "CREATE DATABASE IF NOT EXISTS ".$dbName;
 	if ($conn->query($sql) === TRUE) {
 		// Create user table if it does not already exists
